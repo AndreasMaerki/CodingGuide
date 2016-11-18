@@ -1,10 +1,6 @@
-# The Official raywenderlich.com Swift Style Guide.
-
-This style guide is different from others you may see, because the focus is centered on readability for print and the web. We created this style guide to keep the code in our books, tutorials, and starter kits nice and consistent — even though we have many different authors working on the books.
+# Style Guide.
 
 Our overarching goals are conciseness, readability, and simplicity.
-
-Writing Objective-C? Check out our [Objective-C Style Guide](https://github.com/raywenderlich/objective-c-style-guide) too.
 
 ## Table of Contents
 
@@ -66,8 +62,9 @@ Use descriptive names with camel case for classes, methods, variables, etc. Type
 ```swift
 private let maximumWidgetCount = 100
 
-class WidgetContainer {
-  var widgetButton: UIButton
+class WidgetContainer 
+{
+  var widgetBTN: UIButton
   let widgetHeightPercentage = 0.85
 }
 ```
@@ -77,7 +74,8 @@ class WidgetContainer {
 ```swift
 let MAX_WIDGET_COUNT = 100
 
-class app_widgetContainer {
+class app_widgetContainer
+{
   var wBut: UIButton
   let wHeightPct = 0.85
 }
@@ -128,7 +126,8 @@ Following Apple's API Design Guidelines, protocols names that describe what some
 Following Apple's API Design Guidelines for Swift 3, use lowerCamelCase for enumeration values.
 
 ```swift
-enum Shape {
+enum Shape 
+{
   case rectangle
   case square
   case rightTriangle
@@ -219,24 +218,28 @@ Use extensions to organize your code into logical blocks of functionality. Each 
 
 **Preferred:**
 ```swift
-class MyViewController: UIViewController {
+class MyViewController: UIViewController
+{
   // class stuff here
 }
 
 // MARK: - UITableViewDataSource
-extension MyViewController: UITableViewDataSource {
+extension MyViewController: UITableViewDataSource
+{
   // table view data source methods
 }
 
 // MARK: - UIScrollViewDelegate
-extension MyViewController: UIScrollViewDelegate {
+extension MyViewController: UIScrollViewDelegate
+{
   // scroll view delegate methods
 }
 ```
 
 **Not Preferred:**
 ```swift
-class MyViewController: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
+class MyViewController: UIViewController, UITableViewDataSource, UIScrollViewDelegate 
+{
   // all methods
 }
 ```
@@ -247,23 +250,26 @@ For UIKit view controllers, consider grouping lifecycle, custom accessors, and I
 
 ### Unused Code
 
-Unused (dead) code, including Xcode template code and placeholder comments should be removed. An exception is when your tutorial or book instructs the user to use the commented code.
+Unused (dead) code, including Xcode template code and placeholder comments should be removed.
 
-Aspirational methods not directly associated with the tutorial whose implementation simply calls the super class should also be removed. This includes any empty/unused UIApplicationDelegate methods.
+Aspirational methods should also be removed. This includes any empty/unused UIApplicationDelegate methods.
 
 **Not Preferred:**
 ```swift
-override func didReceiveMemoryWarning() {
+override func didReceiveMemoryWarning()
+{
    super.didReceiveMemoryWarning()
   // Dispose of any resources that can be recreated.
 }
 
-override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+override func numberOfSectionsInTableView(tableView: UITableView) -> Int 
+{
    // #warning Incomplete implementation, return the number of sections
    return 1
 }
 
-override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int 
+{
   // #warning Incomplete implementation, return the number of rows
   return Database.contacts.count
 }
@@ -288,25 +294,26 @@ Keep imports minimal. For example, don't import `UIKit` when importing `Foundati
   
   ![Xcode Project settings](screens/project_settings.png)
 
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the next line as the statement and close on a new line.
 * Tip: You can re-indent by selecting some code (or ⌘A to select all) and then Control-I (or Editor\Structure\Re-Indent in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
 
 **Preferred:**
 ```swift
-if user.isHappy {
+if user.isHappy
+{
   // Do something
-} else {
+} 
+else 
+{
   // Do something else
 }
 ```
 
 **Not Preferred:**
 ```swift
-if user.isHappy
-{
+if user.isHappy {
   // Do something
-}
-else {
+} else {
   // Do something else
 }
 ```
@@ -317,7 +324,8 @@ else {
 
 **Preferred:**
 ```swift
-class TestDatabase: Database {
+class TestDatabase: Database 
+{
   var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
 }
 ```
@@ -351,7 +359,8 @@ Sometimes, things should be structs but need to conform to `AnyObject` or are hi
 Here's an example of a well-styled class definition:
 
 ```swift
-class Circle: Shape {
+class Circle: Shape 
+{
   var x: Int, y: Int
   var radius: Double
   var diameter: Double {
@@ -363,25 +372,30 @@ class Circle: Shape {
     }
   }
 
-  init(x: Int, y: Int, radius: Double) {
+  init(x: Int, y: Int, radius: Double)
+  {
     self.x = x
     self.y = y
     self.radius = radius
   }
 
-  convenience init(x: Int, y: Int, diameter: Double) {
+  convenience init(x: Int, y: Int, diameter: Double)
+  {
     self.init(x: x, y: y, radius: diameter / 2)
   }
 
-  func describe() -> String {
+  func describe() -> String
+  {
     return "I am a circle at \(centerString()) with an area of \(computeArea())"
   }
 
-  override func computeArea() -> Double {
+  override func computeArea() -> Double
+  {
     return M_PI * radius * radius
   }
 
-  private func centerString() -> String {
+  private func centerString() -> String
+  {
     return "(\(x),\(y))"
   }
 }
@@ -402,16 +416,16 @@ For conciseness, avoid using `self` since Swift does not require it to access an
 Use `self` when required to differentiate between property names and arguments in initializers, and when referencing properties in closure expressions (as required by the compiler):
 
 ```swift
-class BoardLocation {
+class BoardLocation 
+{
   let row: Int, column: Int
 
-  init(row: Int, column: Int) {
+  init(row: Int, column: Int)
+  {
     self.row = row
     self.column = column
     
-    let closure = {
-      print(self.row)
-    }
+    let closure = {print(self.row)}
   }
 }
 ```
@@ -442,9 +456,11 @@ Mark classes `final` when inheritance is not intended. Example:
 
 ```swift
 // Turn any generic type into a reference type using this Box class.
-final class Box<T> {
+final class Box<T> 
+{
   let value: T 
-  init(_ value: T) {
+  init(_ value: T) 
+  {
     self.value = value
   }
 }
@@ -452,19 +468,22 @@ final class Box<T> {
 
 ## Function Declarations
 
-Keep short function declarations on one line including the opening brace:
+Keep short function declarations on one line excluding the opening brace:
 
 ```swift
-func reticulateSplines(spline: [Double]) -> Bool {
+func reticulateSplines(spline: [Double]) -> Bool 
+{
   // reticulate code goes here
 }
 ```
 
-For functions with long signatures, add line breaks at appropriate points and add an extra indent on subsequent lines:
+For functions with long signatures, add line breaks at comma and add an extra indent on subsequent lines:
 
 ```swift
-func reticulateSplines(spline: [Double], adjustmentFactor: Double,
-    translateConstant: Int, comment: String) -> Bool {
+func reticulateSplines(spline: [Double],
+                       adjustmentFactor: Double,
+                       translateConstant: Int, comment: String) -> Bool 
+{
   // reticulate code goes here
 }
 ```
@@ -475,7 +494,8 @@ Use trailing closure syntax only if there's a single closure expression paramete
 
 **Preferred:**
 ```swift
-UIView.animateWithDuration(1.0) {
+UIView.animateWithDuration(1.0)
+{
   self.myView.alpha = 0
 }
 
@@ -506,9 +526,7 @@ UIView.animateWithDuration(1.0,
 For single-expression closures where the context is clear, use implicit returns:
 
 ```swift
-attendeeList.sort { a, b in
-  a > b
-}
+attendeeList.sort { a, b in a > b }
 ```
 
 Chained methods using trailing closures should be clear and easy to read in context. Decisions on spacing, line breaks, and when to use named versus anonymous arguments is left to the discretion of the author. Examples:
@@ -550,7 +568,8 @@ You can define constants on a type rather than an instance of that type using ty
 
 **Preferred:**
 ```swift
-enum Math {
+enum Math 
+{
   static let e  = 2.718281828459045235360287
   static let pi = 3.141592653589793238462643
 }
@@ -587,7 +606,8 @@ self.textContainer?.textLabel?.setNeedsDisplay()
 Use optional binding when it's more convenient to unwrap once and perform multiple operations:
 
 ```swift
-if let textContainer = self.textContainer {
+if let textContainer = self.textContainer 
+{
   // do many things with textContainer
 }
 ```
@@ -602,7 +622,8 @@ var subview: UIView?
 var volume: Double?
 
 // later on...
-if let subview = subview, volume = volume {
+if let subview = subview, volume = volume
+{
   // do something with unwrapped subview and volume
 }
 ```
@@ -612,8 +633,10 @@ if let subview = subview, volume = volume {
 var optionalSubview: UIView?
 var volume: Double?
 
-if let unwrappedSubview = optionalSubview {
-  if let realVolume = volume {
+if let unwrappedSubview = optionalSubview 
+{
+  if let realVolume = volume 
+  {
     // do something with unwrappedSubview and realVolume
   }
 }
@@ -645,7 +668,8 @@ Consider using lazy initialization for finer grain control over object lifetime.
 ```swift
 lazy var locationManager: CLLocationManager = self.makeLocationManager()
 
-private func makeLocationManager() -> CLLocationManager {
+private func makeLocationManager() -> CLLocationManager
+{
   let manager = CLLocationManager()
   manager.desiredAccuracy = kCLLocationAccuracyBest
   manager.delegate = self
@@ -780,14 +804,16 @@ Full access control annotation in tutorials can distract from the main topic and
 
 **Preferred:**
 ```swift
-class TimeMachine {  
+class TimeMachine 
+{  
   private dynamic lazy var fluxCapacitor = FluxCapacitor()
 }
 ```
 
 **Not Preferred:**
 ```swift
-class TimeMachine {  
+class TimeMachine 
+{  
   lazy dynamic private var fluxCapacitor = FluxCapacitor()
 }
 ```
@@ -798,19 +824,23 @@ Prefer the `for-in` style of `for` loop over the `while-condition-increment` sty
 
 **Preferred:**
 ```swift
-for _ in 0..<3 {
+for _ in 0..<3 
+{
   print("Hello three times")
 }
 
-for (index, person) in attendeeList.enumerate() {
+for (index, person) in attendeeList.enumerate() 
+{
   print("\(person) is at position #\(index)")
 }
 
-for index in 0.stride(to: items.count, by: 2) {
+for index in 0.stride(to: items.count, by: 2)
+{
   print(index)
 }
 
-for index in (0...3).reverse() {
+for index in (0...3).reverse() 
+{
   print(index)
 }
 ```
@@ -818,14 +848,16 @@ for index in (0...3).reverse() {
 **Not Preferred:**
 ```swift
 var i = 0
-while i < 3 {
+while i < 3 
+{
   print("Hello three times")
   i += 1
 }
 
 
 var i = 0
-while i < attendeeList.count {
+while i < attendeeList.count 
+{
   let person = attendeeList[i]
   print("\(person) is at position #\(i)")
   i += 1
@@ -850,19 +882,24 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 
 **Not Preferred:**
 ```swift
-func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
+func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies
+{
 
-  if let context = context {
-    if let inputData = inputData {
+  if let context = context
+  {
+    if let inputData = inputData
+    {
       // use context and input to compute the frequencies
 
       return frequencies
     }
-    else {
+    else
+    {
       throw FFTError.noInputData
     }
   }
-  else {
+  else
+  {
     throw FFTError.noContext
   }
 }
@@ -926,14 +963,16 @@ Parentheses around conditionals are not required and should be omitted.
 
 **Preferred:**
 ```swift
-if name == "Hello" {
+if name == "Hello" 
+{
   print("World")
 }
 ```
 
 **Not Preferred:**
 ```swift
-if (name == "Hello") {
+if (name == "Hello") 
+{
   print("World")
 }
 ```
@@ -944,40 +983,9 @@ The following copyright statement should be included at the top of every source
 file:
 
     /**
-     * Copyright (c) 2016 Razeware LLC
+     * Copyright (c) 2016 V AG
      *
-     * Permission is hereby granted, free of charge, to any person obtaining a copy
-     * of this software and associated documentation files (the "Software"), to deal
-     * in the Software without restriction, including without limitation the rights
-     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     * copies of the Software, and to permit persons to whom the Software is
-     * furnished to do so, subject to the following conditions:
-     *
-     * The above copyright notice and this permission notice shall be included in
-     * all copies or substantial portions of the Software.
-     *
-     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     * THE SOFTWARE.
      */
-
-## Smiley Face
-
-Smiley faces are a very prominent style feature of the raywenderlich.com site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
-
-**Preferred:**
-```
-:]
-```
-
-**Not Preferred:**
-```
-:)
-```  
 
 ## Style Guide License
 

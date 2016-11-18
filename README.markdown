@@ -111,7 +111,8 @@ timedAction(afterDelay: 1.0, perform: someOtherAction)
 For methods, follow the standard Apple convention of referring to the first parameter in the method name:
 
 ```swift
-class Counter {
+class Counter 
+{
   func combineWith(otherCounter: Counter, options: Dictionary?) { ... }
   func incrementBy(amount: Int) { ... }
 }
